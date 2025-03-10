@@ -19,7 +19,7 @@ xmlns:groupchat="https://rss.ag/rss-groupchat-extension/ns/1.0/"
 This namespace must be declared in the `<rss>` element of any feed implementing this extension:
 
 ```xml
-<rss version="2.0" xmlns:groupchat="https://github.com/rss.ag/rss-groupchat-extension/ns/1.0/">
+<rss version="2.0" xmlns:groupchat="https://rss.ag/rss-groupchat-extension/ns/1.0/">
 ```
 
 ## Elements and Attributes
@@ -140,7 +140,7 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:groupchat="https://github.com/rss.ag/rss-groupchat-extension/ns/1.0/">
+<rss version="2.0" xmlns:groupchat="https://rss.ag/rss-groupchat-extension/ns/1.0/">
   <channel>
     <title>Example Feed with GroupChat Extension</title>
     <link>https://example.com/feed</link>
