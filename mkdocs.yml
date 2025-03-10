@@ -3,8 +3,8 @@ site_url: https://rss.ag/rss-groupchat-extension/
 site_description: A specification for extending RSS 2.0 with group chat functionality
 site_author: Brian Hendrickson
 
-repo_name: suomisoft/rssGroupChat
-repo_url: https://github.com/suomisoft/rssGroupChat
+repo_name: voitto/rssGroupChat
+repo_url: https://github.com/voitto/rssGroupChat
 edit_uri: edit/main/docs/
 
 # Copyright
@@ -82,4 +82,4 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/suomisoft
+      link: https://github.com/voitto/rssGroupChat
