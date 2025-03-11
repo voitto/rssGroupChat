@@ -72,11 +72,7 @@ plugins:
 
 # Page tree
 nav:
-  - Home: index.md
-  - Specification: rss-groupchat-extension.md
-  - Examples:
-    - Basic Usage: examples/basic-usage.md
-    - Advanced Configuration: examples/advanced-config.md
+  - Specification: index.md
 
 # Extra
 extra:

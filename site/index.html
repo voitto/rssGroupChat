@@ -16,8 +16,6 @@
       
       
       
-        <link rel="next" href="rss-groupchat-extension/">
-      
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
@@ -112,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Specification
             
           </span>
         </div>
@@ -270,7 +268,7 @@
           
   
   <span class="md-ellipsis">
-    Home
+    Specification
     
   </span>
   
@@ -282,7 +280,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Specification
     
   </span>
   
@@ -305,9 +303,192 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#namespace-declaration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Namespace Declaration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elements-and-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elements and Attributes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elements and Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groupchatgroup-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      &lt;groupchat:group&gt; Element
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&lt;groupchat:group&gt; Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Attributes:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-metaweblog-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with MetaWebLog API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with MetaWebLog API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sending-replies-to-group-conversations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending Replies to Group Conversations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sending Replies to Group Conversations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metaweblog-request-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      MetaWebLog Request Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Notifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-time Notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-cloud-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Cloud Element
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#websocket-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebSocket Implementation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Feed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -316,114 +497,6 @@
     </ul>
   
 </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="rss-groupchat-extension/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Specification
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Examples
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Examples
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="examples/basic-usage/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Basic Usage
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="examples/advanced-config/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Advanced Configuration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
       
     </li>
   
@@ -456,9 +529,192 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#namespace-declaration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Namespace Declaration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elements-and-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elements and Attributes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elements and Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groupchatgroup-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      &lt;groupchat:group&gt; Element
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&lt;groupchat:group&gt; Element">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Attributes:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-metaweblog-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with MetaWebLog API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with MetaWebLog API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sending-replies-to-group-conversations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending Replies to Group Conversations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sending Replies to Group Conversations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metaweblog-request-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      MetaWebLog Request Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Notifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-time Notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-cloud-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Cloud Element
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#websocket-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebSocket Implementation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-feed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Feed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -487,8 +743,155 @@
 <p><strong>Version:</strong> 1.0<br />
 <strong>Author:</strong> Brian Hendrickson
 <strong>Date:</strong> March 10, 2025</p>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API.</p>
+<h2 id="namespace-declaration">Namespace Declaration<a class="headerlink" href="#namespace-declaration" title="Permanent link">&para;</a></h2>
+<p>The GroupChat Extension uses the following namespace:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>xmlns:groupchat=&quot;https://rss.ag/rss-groupchat-extension/ns/1.0/&quot;
+</span></code></pre></div>
+<p>This namespace must be declared in the <code>&lt;rss&gt;</code> element of any feed implementing this extension:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;rss</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="w"> </span><span class="na">xmlns:groupchat=</span><span class="s">&quot;https://rss.ag/rss-groupchat-extension/ns/1.0/&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></div>
+<h2 id="elements-and-attributes">Elements and Attributes<a class="headerlink" href="#elements-and-attributes" title="Permanent link">&para;</a></h2>
+<h3 id="groupchatgroup-element"><code>&lt;groupchat:group&gt;</code> Element<a class="headerlink" href="#groupchatgroup-element" title="Permanent link">&para;</a></h3>
+<p>The <code>&lt;groupchat:group&gt;</code> element must be a child of the <code>&lt;item&gt;</code> element in an RSS feed. This element identifies an item as part of a group conversation.</p>
+<h4 id="required-attributes">Required Attributes:<a class="headerlink" href="#required-attributes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>id</strong> (required): A string that uniquely identifies the particular group chat on the host feed reader/publisher web app.</li>
+<li><strong>url</strong> (required): The URL of the feed that hosts this group conversation. This URL serves as the endpoint for MetaWebLog API requests.</li>
+<li><strong>title</strong> (required): A human-readable name for the group conversation.</li>
+</ul>
+<h4 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&lt;title&gt;</span>New<span class="w"> </span>message<span class="w"> </span>in<span class="w"> </span>group<span class="w"> </span>chat<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>content<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>message<span class="w"> </span>in<span class="w"> </span>the<span class="w"> </span>group<span class="w"> </span>chat.<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:30:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nt">&lt;/item&gt;</span>
+</span></code></pre></div>
+<h2 id="integration-with-metaweblog-api">Integration with MetaWebLog API<a class="headerlink" href="#integration-with-metaweblog-api" title="Permanent link">&para;</a></h2>
+<h3 id="sending-replies-to-group-conversations">Sending Replies to Group Conversations<a class="headerlink" href="#sending-replies-to-group-conversations" title="Permanent link">&para;</a></h3>
+<p>Clients can send replies to group conversations by making a MetaWebLog API request to the URL specified in the <code>url</code> attribute of the <code>&lt;groupchat:group&gt;</code> element. The group's <code>id</code> value must be included in the <code>categories</code> field of the MetaWebLog API request.</p>
+<h4 id="metaweblog-request-example">MetaWebLog Request Example:<a class="headerlink" href="#metaweblog-request-example" title="Permanent link">&para;</a></h4>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">&lt;methodCall&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&lt;methodName&gt;</span>metaWeblog.newPost<span class="nt">&lt;/methodName&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&lt;params&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>blogid<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>username<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>password<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="nt">&lt;struct&gt;</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>title<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>Reply<span class="w"> </span>to<span class="w"> </span>group<span class="w"> </span>chat<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>description<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>This<span class="w"> </span>is<span class="w"> </span>my<span class="w"> </span>reply<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>group<span class="w"> </span>conversation.<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>categories<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">            </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">              </span><span class="nt">&lt;array&gt;</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">                </span><span class="nt">&lt;data&gt;</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>group123<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">                </span><span class="nt">&lt;/data&gt;</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">              </span><span class="nt">&lt;/array&gt;</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">            </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">        </span><span class="nt">&lt;/struct&gt;</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">      </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;boolean&gt;</span>1<span class="nt">&lt;/boolean&gt;&lt;/value&gt;</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="nt">&lt;/methodCall&gt;</span>
+</span></code></pre></div>
+<h2 id="real-time-notifications">Real-time Notifications<a class="headerlink" href="#real-time-notifications" title="Permanent link">&para;</a></h2>
+<h3 id="using-cloud-element">Using Cloud Element<a class="headerlink" href="#using-cloud-element" title="Permanent link">&para;</a></h3>
+<p>For real-time updates, this extension recommends using the standard RSS <code>&lt;cloud&gt;</code> element to notify clients of feed updates:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">&lt;cloud</span><span class="w"> </span><span class="na">domain=</span><span class="s">&quot;rpc.example.com&quot;</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;80&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;/RPC2&quot;</span><span class="w"> </span><span class="na">registerProcedure=</span><span class="s">&quot;pleaseNotify&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;xml-rpc&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span></code></pre></div>
+<p>When the feed is updated with new group chat messages, the cloud mechanism sends a notification to subscribed clients, prompting them to fetch the updated feed.</p>
+<h3 id="websocket-implementation">WebSocket Implementation<a class="headerlink" href="#websocket-implementation" title="Permanent link">&para;</a></h3>
+<p>While not part of the core RSS specification, this extension recommends implementing WebSockets to push updates from the client feed reader to the browser for immediate rendering. This is handled at the application level and is not part of the feed format itself.</p>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p>A valid RSS feed implementing the GroupChat Extension must:</p>
+<ol>
+<li>Declare the GroupChat namespace in the <code>&lt;rss&gt;</code> element</li>
+<li>Include <code>&lt;groupchat:group&gt;</code> elements only within <code>&lt;item&gt;</code> elements</li>
+<li>Ensure all required attributes (<code>id</code>, <code>url</code>, and <code>title</code>) are present on each <code>&lt;groupchat:group&gt;</code> element</li>
+</ol>
+<h2 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The <code>url</code> attribute should include appropriate authentication mechanisms, such as API keys or tokens, to ensure only authorized users can post to a group.</li>
+<li>Implementers should validate all content received via MetaWebLog API requests to prevent injection attacks.</li>
+<li>Applications should implement appropriate access controls to ensure private group conversations remain private.</li>
+</ul>
+<h2 id="compatibility">Compatibility<a class="headerlink" href="#compatibility" title="Permanent link">&para;</a></h2>
+<p>This extension is designed to be fully compatible with RSS 2.0 and can be implemented alongside other RSS extensions. Feed readers that do not support this extension will simply ignore the additional elements and display the items as regular feed entries.</p>
+<h2 id="example-feed">Example Feed<a class="headerlink" href="#example-feed" title="Permanent link">&para;</a></h2>
+<p>Below is a complete example of an RSS feed implementing the GroupChat Extension:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">&lt;rss</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="w"> </span><span class="na">xmlns:groupchat=</span><span class="s">&quot;https://rss.ag/rss-groupchat-extension/ns/1.0/&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&lt;channel&gt;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">&lt;title&gt;</span>Example<span class="w"> </span>Feed<span class="w"> </span>with<span class="w"> </span>GroupChat<span class="w"> </span>Extension<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">&lt;link&gt;</span>https://example.com/feed<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>feed<span class="w"> </span>demonstrates<span class="w"> </span>the<span class="w"> </span>GroupChat<span class="w"> </span>Extension<span class="w"> </span>for<span class="w"> </span>RSS<span class="w"> </span>2.0<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">&lt;language&gt;</span>en-us<span class="nt">&lt;/language&gt;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>16:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">&lt;lastBuildDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>16:00:00<span class="w"> </span>GMT<span class="nt">&lt;/lastBuildDate&gt;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&lt;cloud</span><span class="w"> </span><span class="na">domain=</span><span class="s">&quot;rpc.example.com&quot;</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;80&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;/RPC2&quot;</span><span class="w"> </span><span class="na">registerProcedure=</span><span class="s">&quot;pleaseNotify&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;xml-rpc&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>Welcome<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>chat!<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>message<span class="w"> </span>in<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>conversation.<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12344<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12344<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user1@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>RE:<span class="w"> </span>Welcome<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>chat!<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>Thanks<span class="w"> </span>for<span class="w"> </span>setting<span class="w"> </span>this<span class="w"> </span>up!<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:30:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user2@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>Public<span class="w"> </span>news<span class="w"> </span>post<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>regular<span class="w"> </span>news<span class="w"> </span>post,<span class="w"> </span>not<span class="w"> </span>part<span class="w"> </span>of<span class="w"> </span>any<span class="w"> </span>group<span class="w"> </span>chat.<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>14:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/news/98765<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/news/98765<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>admin@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="w">  </span><span class="nt">&lt;/channel&gt;</span>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="nt">&lt;/rss&gt;</span>
+</span></code></pre></div>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>MIT</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>RSS 2.0 Specification: https://www.rssboard.org/rss-specification</li>
+<li>MetaWebLog API Specification: http://xmlrpc.scripting.com/metaWeblogApi.html</li>
+</ol>
 
 
 
