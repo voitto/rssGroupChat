@@ -192,6 +192,15 @@ MIT
 2. MetaWebLog API Specification: http://xmlrpc.scripting.com/metaWeblogApi.html
 
 
+## Implementations
+
+The following implementations of the RSS GroupChat Extension are available:
+
+1. [RSS GroupChat Server](https://github.com/voitto/rss-groupchat-server) - Example server implementation
+2. [RSS GroupChat Client](https://github.com/voitto/rss-groupchat-client) - Example client implementation
+3. [Social Web](https://socialweb.cloud/) - Production implementation in a feed reader with group chat support 
+
+
 
 
 
