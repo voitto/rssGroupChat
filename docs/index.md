@@ -188,7 +188,7 @@ MIT
 
 ## References
 
-1. RSS 2.0 Specification: https://www.rssboard.org/rss-specification
+1. RSS 2.0 Specification: https://cyber.harvard.edu/rss/rss.html
 2. MetaWebLog API Specification: http://xmlrpc.scripting.com/metaWeblogApi.html
 
 
