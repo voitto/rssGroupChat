@@ -49,9 +49,13 @@ The `<groupchat:group>` element must be a child of the `<item>` element in an RS
 
 ## Integration with MetaWebLog API
 
+The RSS GroupChat Extension supports both creating and deleting replies in group conversations through XML-RPC requests to the feed URL.
+
 ### Sending Replies to Group Conversations
 
 Clients can send replies to group conversations by making a MetaWebLog API request to the URL specified in the `url` attribute of the `<groupchat:group>` element. The group's `id` value must be included in the `categories` field of the MetaWebLog API request.
+`blogid`, `username` and `password` are ignored for now (key in URL provides auth) but are included for well-formed XMLRPC.
+The final boolean parameter indicates whether the post should be published (typically `true` for delete operations).
 
 #### MetaWebLog Request Example:
 
@@ -100,6 +104,38 @@ Clients can send replies to group conversations by making a MetaWebLog API reque
 </methodCall>
 ```
 
+### Deleting Replies from Group Conversations
+
+Clients can delete their own replies from group conversations by making an XML-RPC request to the URL specified in the `url` attribute of the `<groupchat:group>` element. The delete operation requires only the post ID of the message to be deleted.
+
+#### XML-RPC Delete Request Example:
+
+```xml
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>metaWeblog.deletePost</methodName>
+  <params>
+    <param>
+      <value><string>postid</string></value>
+    </param>
+    <param>
+      <value><string>username</string></value>
+    </param>
+    <param>
+      <value><string>password</string></value>
+    </param>
+    <param>
+      <value><boolean>1</boolean></value>
+    </param>
+  </params>
+</methodCall>
+```
+
+Where:
+- `postid` is the unique identifier of the post to be deleted
+- `blogid`, `username` and `password` are ignored for now (key in URL provides auth) but are included for well-formed XMLRPC
+- The final boolean parameter indicates whether the post should be published (typically `true` for delete operations)
+
 ## Real-time Notifications
 
 ### Using Cloud Element
@@ -129,6 +165,8 @@ A valid RSS feed implementing the GroupChat Extension must:
 - The `url` attribute should include appropriate authentication mechanisms, such as API keys or tokens, to ensure only authorized users can post to a group.
 - Implementers should validate all content received via MetaWebLog API requests to prevent injection attacks.
 - Applications should implement appropriate access controls to ensure private group conversations remain private.
+- Delete operations should be restricted to the original author of the post to prevent unauthorized deletion of messages.
+- Implementers should validate post IDs in delete requests to ensure they exist and belong to the authenticated user.
 
 ## Compatibility
 
