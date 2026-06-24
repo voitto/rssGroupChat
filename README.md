@@ -1,12 +1,20 @@
 # RSS GroupChat Extension
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Author:** Brian Hendrickson
-**Date:** March 10, 2025
+**Date:** June 23, 2026
+
+> **Changelog**
+> - **1.1** — Added media attachments: replies may carry an image or video,
+>   uploaded with the standard MetaWebLog `metaWeblog.newMediaObject` call and
+>   referenced from `metaWeblog.newPost` via a standard RSS `<enclosure>`.
+>   Backward compatible: the namespace URI is unchanged, and readers that do
+>   not implement media simply ignore the `enclosure`.
+> - **1.0** — Initial release.
 
 ## Overview
 
-The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API.
+The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API. Replies may include media (images and video), transferred with the standard MetaWebLog media-upload call and surfaced in the feed as a standard RSS `<enclosure>`.
 
 ## Namespace Declaration
 
@@ -46,6 +54,32 @@ The `<groupchat:group>` element must be a child of the `<item>` element in an RS
   <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
 </item>
 ```
+
+### `<enclosure>` Element (Media)
+
+An item whose message carries an image or video includes a standard RSS 2.0 `<enclosure>` element alongside its `<groupchat:group>`. No new namespace is involved — media reuses the RSS 2.0 enclosure mechanism that podcast feeds already use.
+
+#### Attributes:
+
+- **url** (required): A fetchable URL for the media on the host. Because group conversations are private, this URL should be access-controlled — for example a time-limited signed URL that does not require the fetching client to hold a session on the host.
+- **type** (required): The MIME type of the media (e.g. `image/jpeg`, `video/mp4`).
+- **length** (recommended): The size of the media in bytes, per RSS 2.0.
+
+#### Example:
+
+```xml
+<item>
+  <title>(media)</title>
+  <description></description>
+  <enclosure url="https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;sig=Yt3v...Qk" type="image/jpeg" length="1816742" />
+  <pubDate>Mon, 10 Mar 2025 15:30:00 GMT</pubDate>
+  <guid isPermaLink="false">15</guid>
+  <author>user2@example.com</author>
+  <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+</item>
+```
+
+A media-only message (no accompanying text) uses the placeholder `(media)` as a human-readable `<title>` so plain RSS readers show something sensible. GroupChat-aware clients should render the enclosure and ignore that placeholder title when an `<enclosure>` is present.
 
 ## Integration with MetaWebLog API
 
@@ -104,6 +138,121 @@ The final boolean parameter indicates whether the post should be published (typi
 </methodCall>
 ```
 
+### Attaching Media to Replies
+
+A reply may carry an image or video. Media transfer uses the standard MetaWebLog `metaWeblog.newMediaObject` call, performed *alongside* the `metaWeblog.newPost` that creates the message — the same two-call pattern blogging clients use to attach an image to a post. Both calls go to the conversation's feed `url` and are authenticated the same way (the key in the URL).
+
+The sequence is:
+
+1. **Upload the binary** with `metaWeblog.newMediaObject`. The struct parameter carries the file `name`, MIME `type`, and the raw file `bits` (base64-encoded). The host stores the media and returns a struct containing a `url` at which the media can be fetched.
+2. **Create the message** with `metaWeblog.newPost`, adding a standard RSS `enclosure` member to the struct whose `url` is the value returned in step 1. The host attaches that media to the new message. A media-only message is valid — send an empty `title`/`description` with the `enclosure` member present.
+
+The host then republishes the message in its feed with a matching `<enclosure>` element (see [`<enclosure>` Element (Media)](#enclosure-element-media)), so every subscriber — including the original sender, who sees the message return on the round-trip — can render the attachment.
+
+Separating the upload (`newMediaObject`) from the message (`newPost`) keeps message transmission unchanged for text-only replies and lets the host enforce media size/type limits and persist the blob before the message that references it exists.
+
+#### `metaWeblog.newMediaObject` Request Example:
+
+```xml
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>metaWeblog.newMediaObject</methodName>
+  <params>
+    <param>
+      <value><string>blogid</string></value>
+    </param>
+    <param>
+      <value><string>username</string></value>
+    </param>
+    <param>
+      <value><string>password</string></value>
+    </param>
+    <param>
+      <value>
+        <struct>
+          <member>
+            <name>name</name>
+            <value><string>photo.jpg</string></value>
+          </member>
+          <member>
+            <name>type</name>
+            <value><string>image/jpeg</string></value>
+          </member>
+          <member>
+            <name>bits</name>
+            <value><base64>/9j/4AAQSkZJRgABAQ... (base64-encoded file bytes) ...</base64></value>
+          </member>
+        </struct>
+      </value>
+    </param>
+  </params>
+</methodCall>
+```
+
+#### `metaWeblog.newMediaObject` Response:
+
+The response is a struct with a single `url` member, per the MetaWebLog specification. The returned URL is what the subsequent `newPost` references in its `enclosure`.
+
+```xml
+<?xml version="1.0"?>
+<methodResponse>
+  <params>
+    <param>
+      <value>
+        <struct>
+          <member>
+            <name>url</name>
+            <value><string>https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;sig=Yt3v...Qk</string></value>
+          </member>
+        </struct>
+      </value>
+    </param>
+  </params>
+</methodResponse>
+```
+
+#### `metaWeblog.newPost` with an `enclosure` member:
+
+The message-creating call is identical to a text reply except for an added `enclosure` member in the struct. Its value is a struct carrying the `url` returned by `newMediaObject` (and, for well-formed RSS, the `type` and `length`):
+
+```xml
+        <struct>
+          <member>
+            <name>title</name>
+            <value><string>Check out this photo!</string></value>
+          </member>
+          <member>
+            <name>categories</name>
+            <value>
+              <array>
+                <data>
+                  <value><string>group123</string></value>
+                </data>
+              </array>
+            </value>
+          </member>
+          <member>
+            <name>enclosure</name>
+            <value>
+              <struct>
+                <member>
+                  <name>url</name>
+                  <value><string>https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;sig=Yt3v...Qk</string></value>
+                </member>
+                <member>
+                  <name>type</name>
+                  <value><string>image/jpeg</string></value>
+                </member>
+                <member>
+                  <name>length</name>
+                  <value><int>1816742</int></value>
+                </member>
+              </struct>
+            </value>
+          </member>
+        </struct>
+```
+
 ### Deleting Replies from Group Conversations
 
 Clients can delete their own replies from group conversations by making an XML-RPC request to the URL specified in the `url` attribute of the `<groupchat:group>` element. The delete operation requires only the post ID of the message to be deleted.
@@ -159,6 +308,7 @@ A valid RSS feed implementing the GroupChat Extension must:
 1. Declare the GroupChat namespace in the `<rss>` element
 2. Include `<groupchat:group>` elements only within `<item>` elements
 3. Ensure all required attributes (`id`, `url`, and `title`) are present on each `<groupchat:group>` element
+4. For items carrying media, include a standard RSS `<enclosure>` with at least `url` and `type`; the enclosure `url` must be fetchable by subscribers (subject to the access controls below)
 
 ## Security Considerations
 
@@ -167,6 +317,9 @@ A valid RSS feed implementing the GroupChat Extension must:
 - Applications should implement appropriate access controls to ensure private group conversations remain private.
 - Delete operations should be restricted to the original author of the post to prevent unauthorized deletion of messages.
 - Implementers should validate post IDs in delete requests to ensure they exist and belong to the authenticated user.
+- Media uploaded via `metaWeblog.newMediaObject` should be authenticated identically to `newPost` (the key in the feed URL), and the host should enforce size and MIME-type limits before storing the bytes.
+- Because group conversations are private, media `<enclosure>` URLs should be access-controlled rather than world-readable — for example time-limited signed URLs scoped to a single media object — so that possessing a feed item does not grant permanent, shareable access to the underlying file.
+- A host should associate an uploaded media object with the message that references it (e.g. by confirming the `enclosure` `url` resolves to media the host itself stored for the authenticated user) rather than trusting an arbitrary external `url`.
 
 ## Compatibility
 
@@ -204,6 +357,17 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <pubDate>Mon, 10 Mar 2025 15:30:00 GMT</pubDate>
       <link>https://example.com/messages/12345</link>
       <guid>https://example.com/messages/12345</guid>
+      <author>user2@example.com</author>
+      <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+    </item>
+    
+    <item>
+      <title>(media)</title>
+      <description></description>
+      <enclosure url="https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;sig=Yt3v...Qk" type="image/jpeg" length="1816742" />
+      <pubDate>Mon, 10 Mar 2025 15:45:00 GMT</pubDate>
+      <link>https://example.com/messages/12346</link>
+      <guid isPermaLink="false">12346</guid>
       <author>user2@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
     </item>
