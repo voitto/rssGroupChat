@@ -363,6 +363,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enclosure-element-media" class="md-nav__link">
+    <span class="md-ellipsis">
+      &lt;enclosure&gt; Element (Media)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&lt;enclosure&gt; Element (Media)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -392,6 +425,48 @@
   <a href="#metaweblog-request-example" class="md-nav__link">
     <span class="md-ellipsis">
       MetaWebLog Request Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-media-to-replies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attaching Media to Replies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attaching Media to Replies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metaweblognewmediaobject-request-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      metaWeblog.newMediaObject Request Example:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metaweblognewmediaobject-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      metaWeblog.newMediaObject Response:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metaweblognewpost-with-an-enclosure-member" class="md-nav__link">
+    <span class="md-ellipsis">
+      metaWeblog.newPost with an enclosure member:
     </span>
   </a>
   
@@ -622,6 +697,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enclosure-element-media" class="md-nav__link">
+    <span class="md-ellipsis">
+      &lt;enclosure&gt; Element (Media)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="&lt;enclosure&gt; Element (Media)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -651,6 +759,48 @@
   <a href="#metaweblog-request-example" class="md-nav__link">
     <span class="md-ellipsis">
       MetaWebLog Request Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-media-to-replies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attaching Media to Replies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attaching Media to Replies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metaweblognewmediaobject-request-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      metaWeblog.newMediaObject Request Example:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metaweblognewmediaobject-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      metaWeblog.newMediaObject Response:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metaweblognewpost-with-an-enclosure-member" class="md-nav__link">
+    <span class="md-ellipsis">
+      metaWeblog.newPost with an enclosure member:
     </span>
   </a>
   
@@ -806,11 +956,20 @@
 
 
 <h1 id="rss-groupchat-extension">RSS GroupChat Extension<a class="headerlink" href="#rss-groupchat-extension" title="Permanent link">&para;</a></h1>
-<p><strong>Version:</strong> 1.0<br />
+<p><strong>Version:</strong> 1.1<br />
 <strong>Author:</strong> Brian Hendrickson
-<strong>Date:</strong> March 10, 2025</p>
+<strong>Date:</strong> June 23, 2026</p>
+<blockquote>
+<p><strong>Changelog</strong>
+- <strong>1.1</strong> — Added media attachments: replies may carry an image or video,
+  uploaded with the standard MetaWebLog <code>metaWeblog.newMediaObject</code> call and
+  referenced from <code>metaWeblog.newPost</code> via a standard RSS <code>&lt;enclosure&gt;</code>.
+  Backward compatible: the namespace URI is unchanged, and readers that do
+  not implement media simply ignore the <code>enclosure</code>.
+- <strong>1.0</strong> — Initial release.</p>
+</blockquote>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API.</p>
+<p>The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API. Replies may include media (images and video), transferred with the standard MetaWebLog media-upload call and surfaced in the feed as a standard RSS <code>&lt;enclosure&gt;</code>.</p>
 <h2 id="namespace-declaration">Namespace Declaration<a class="headerlink" href="#namespace-declaration" title="Permanent link">&para;</a></h2>
 <p>The GroupChat Extension uses the following namespace:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>xmlns:groupchat=&quot;https://rss.ag/rss-groupchat-extension/ns/1.0/&quot;
@@ -837,6 +996,26 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nt">&lt;/item&gt;</span>
 </span></code></pre></div>
+<h3 id="enclosure-element-media"><code>&lt;enclosure&gt;</code> Element (Media)<a class="headerlink" href="#enclosure-element-media" title="Permanent link">&para;</a></h3>
+<p>An item whose message carries an image or video includes a standard RSS 2.0 <code>&lt;enclosure&gt;</code> element alongside its <code>&lt;groupchat:group&gt;</code>. No new namespace is involved — media reuses the RSS 2.0 enclosure mechanism that podcast feeds already use.</p>
+<h4 id="attributes">Attributes:<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>url</strong> (required): A fetchable URL for the media on the host. Because group conversations are private, this URL should be access-controlled — for example a time-limited signed URL that does not require the fetching client to hold a session on the host.</li>
+<li><strong>type</strong> (required): The MIME type of the media (e.g. <code>image/jpeg</code>, <code>video/mp4</code>).</li>
+<li><strong>length</strong> (recommended): The size of the media in bytes, per RSS 2.0.</li>
+</ul>
+<h4 id="example_1">Example:<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h4>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&lt;title&gt;</span>(media)<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&lt;description&gt;&lt;/description&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&lt;enclosure</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;amp;sig=Yt3v...Qk&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;image/jpeg&quot;</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;1816742&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:30:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">&lt;guid</span><span class="w"> </span><span class="na">isPermaLink=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>15<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">&lt;author&gt;</span>user2@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nt">&lt;/item&gt;</span>
+</span></code></pre></div>
+<p>A media-only message (no accompanying text) uses the placeholder <code>(media)</code> as a human-readable <code>&lt;title&gt;</code> so plain RSS readers show something sensible. GroupChat-aware clients should render the enclosure and ignore that placeholder title when an <code>&lt;enclosure&gt;</code> is present.</p>
 <h2 id="integration-with-metaweblog-api">Integration with MetaWebLog API<a class="headerlink" href="#integration-with-metaweblog-api" title="Permanent link">&para;</a></h2>
 <p>The RSS GroupChat Extension supports both creating and deleting replies in group conversations through XML-RPC requests to the feed URL.</p>
 <h3 id="sending-replies-to-group-conversations">Sending Replies to Group Conversations<a class="headerlink" href="#sending-replies-to-group-conversations" title="Permanent link">&para;</a></h3>
@@ -844,58 +1023,12 @@
 <code>blogid</code>, <code>username</code> and <code>password</code> are ignored for now (key in URL provides auth) but are included for well-formed XMLRPC.
 The final boolean parameter indicates whether the post should be published (typically <code>true</code> for delete operations).</p>
 <h4 id="metaweblog-request-example">MetaWebLog Request Example:<a class="headerlink" href="#metaweblog-request-example" title="Permanent link">&para;</a></h4>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">&lt;methodCall&gt;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&lt;methodName&gt;</span>metaWeblog.newPost<span class="nt">&lt;/methodName&gt;</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&lt;params&gt;</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>blogid<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>username<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>password<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">&lt;value&gt;</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="nt">&lt;struct&gt;</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>title<span class="nt">&lt;/name&gt;</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>Reply<span class="w"> </span>to<span class="w"> </span>group<span class="w"> </span>chat<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>description<span class="nt">&lt;/name&gt;</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>This<span class="w"> </span>is<span class="w"> </span>my<span class="w"> </span>reply<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>group<span class="w"> </span>conversation.<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>categories<span class="nt">&lt;/name&gt;</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">            </span><span class="nt">&lt;value&gt;</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">              </span><span class="nt">&lt;array&gt;</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">                </span><span class="nt">&lt;data&gt;</span>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>group123<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">                </span><span class="nt">&lt;/data&gt;</span>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">              </span><span class="nt">&lt;/array&gt;</span>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">            </span><span class="nt">&lt;/value&gt;</span>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">        </span><span class="nt">&lt;/struct&gt;</span>
-</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">      </span><span class="nt">&lt;/value&gt;</span>
-</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;boolean&gt;</span>1<span class="nt">&lt;/boolean&gt;&lt;/value&gt;</span>
-</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
-</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="nt">&lt;/methodCall&gt;</span>
-</span></code></pre></div>
-<h3 id="deleting-replies-from-group-conversations">Deleting Replies from Group Conversations<a class="headerlink" href="#deleting-replies-from-group-conversations" title="Permanent link">&para;</a></h3>
-<p>Clients can delete their own replies from group conversations by making an XML-RPC request to the URL specified in the <code>url</code> attribute of the <code>&lt;groupchat:group&gt;</code> element. The delete operation requires only the post ID of the message to be deleted.</p>
-<h4 id="xml-rpc-delete-request-example">XML-RPC Delete Request Example:<a class="headerlink" href="#xml-rpc-delete-request-example" title="Permanent link">&para;</a></h4>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">&lt;methodCall&gt;</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&lt;methodName&gt;</span>metaWeblog.deletePost<span class="nt">&lt;/methodName&gt;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&lt;methodName&gt;</span>metaWeblog.newPost<span class="nt">&lt;/methodName&gt;</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&lt;params&gt;</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>postid<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>blogid<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>username<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
@@ -904,10 +1037,156 @@ The final boolean parameter indicates whether the post should be published (typi
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>password<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;boolean&gt;</span>1<span class="nt">&lt;/boolean&gt;&lt;/value&gt;</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="nt">&lt;/methodCall&gt;</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">      </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="nt">&lt;struct&gt;</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>title<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>Reply<span class="w"> </span>to<span class="w"> </span>group<span class="w"> </span>chat<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>description<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>This<span class="w"> </span>is<span class="w"> </span>my<span class="w"> </span>reply<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>group<span class="w"> </span>conversation.<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>categories<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">            </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">              </span><span class="nt">&lt;array&gt;</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">                </span><span class="nt">&lt;data&gt;</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>group123<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">                </span><span class="nt">&lt;/data&gt;</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="w">              </span><span class="nt">&lt;/array&gt;</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="w">            </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="w">        </span><span class="nt">&lt;/struct&gt;</span>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="w">      </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;boolean&gt;</span>1<span class="nt">&lt;/boolean&gt;&lt;/value&gt;</span>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="nt">&lt;/methodCall&gt;</span>
+</span></code></pre></div>
+<h3 id="attaching-media-to-replies">Attaching Media to Replies<a class="headerlink" href="#attaching-media-to-replies" title="Permanent link">&para;</a></h3>
+<p>A reply may carry an image or video. Media transfer uses the standard MetaWebLog <code>metaWeblog.newMediaObject</code> call, performed <em>alongside</em> the <code>metaWeblog.newPost</code> that creates the message — the same two-call pattern blogging clients use to attach an image to a post. Both calls go to the conversation's feed <code>url</code> and are authenticated the same way (the key in the URL).</p>
+<p>The sequence is:</p>
+<ol>
+<li><strong>Upload the binary</strong> with <code>metaWeblog.newMediaObject</code>. The struct parameter carries the file <code>name</code>, MIME <code>type</code>, and the raw file <code>bits</code> (base64-encoded). The host stores the media and returns a struct containing a <code>url</code> at which the media can be fetched.</li>
+<li><strong>Create the message</strong> with <code>metaWeblog.newPost</code>, adding a standard RSS <code>enclosure</code> member to the struct whose <code>url</code> is the value returned in step 1. The host attaches that media to the new message. A media-only message is valid — send an empty <code>title</code>/<code>description</code> with the <code>enclosure</code> member present.</li>
+</ol>
+<p>The host then republishes the message in its feed with a matching <code>&lt;enclosure&gt;</code> element (see <a href="#enclosure-element-media"><code>&lt;enclosure&gt;</code> Element (Media)</a>), so every subscriber — including the original sender, who sees the message return on the round-trip — can render the attachment.</p>
+<p>Separating the upload (<code>newMediaObject</code>) from the message (<code>newPost</code>) keeps message transmission unchanged for text-only replies and lets the host enforce media size/type limits and persist the blob before the message that references it exists.</p>
+<h4 id="metaweblognewmediaobject-request-example"><code>metaWeblog.newMediaObject</code> Request Example:<a class="headerlink" href="#metaweblognewmediaobject-request-example" title="Permanent link">&para;</a></h4>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">&lt;methodCall&gt;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&lt;methodName&gt;</span>metaWeblog.newMediaObject<span class="nt">&lt;/methodName&gt;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&lt;params&gt;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>blogid<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>username<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>password<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">      </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="nt">&lt;struct&gt;</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>name<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>photo.jpg<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>type<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>image/jpeg<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>bits<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;base64&gt;</span>/9j/4AAQSkZJRgABAQ...<span class="w"> </span>(base64-encoded<span class="w"> </span>file<span class="w"> </span>bytes)<span class="w"> </span>...<span class="nt">&lt;/base64&gt;&lt;/value&gt;</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">        </span><span class="nt">&lt;/struct&gt;</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">      </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="nt">&lt;/methodCall&gt;</span>
+</span></code></pre></div>
+<h4 id="metaweblognewmediaobject-response"><code>metaWeblog.newMediaObject</code> Response:<a class="headerlink" href="#metaweblognewmediaobject-response" title="Permanent link">&para;</a></h4>
+<p>The response is a struct with a single <code>url</code> member, per the MetaWebLog specification. The returned URL is what the subsequent <code>newPost</code> references in its <code>enclosure</code>.</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">&lt;methodResponse&gt;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&lt;params&gt;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">&lt;struct&gt;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>url<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000<span class="ni">&amp;amp;</span>sig=Yt3v...Qk<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="nt">&lt;/struct&gt;</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">      </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="nt">&lt;/methodResponse&gt;</span>
+</span></code></pre></div>
+<h4 id="metaweblognewpost-with-an-enclosure-member"><code>metaWeblog.newPost</code> with an <code>enclosure</code> member:<a class="headerlink" href="#metaweblognewpost-with-an-enclosure-member" title="Permanent link">&para;</a></h4>
+<p>The message-creating call is identical to a text reply except for an added <code>enclosure</code> member in the struct. Its value is a struct carrying the <code>url</code> returned by <code>newMediaObject</code> (and, for well-formed RSS, the <code>type</code> and <code>length</code>):</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">        </span><span class="nt">&lt;struct&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>title<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">            </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>Check<span class="w"> </span>out<span class="w"> </span>this<span class="w"> </span>photo!<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>categories<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">            </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">              </span><span class="nt">&lt;array&gt;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">                </span><span class="nt">&lt;data&gt;</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>group123<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">                </span><span class="nt">&lt;/data&gt;</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">              </span><span class="nt">&lt;/array&gt;</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">            </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">          </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">            </span><span class="nt">&lt;name&gt;</span>enclosure<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">            </span><span class="nt">&lt;value&gt;</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">              </span><span class="nt">&lt;struct&gt;</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">                </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">                  </span><span class="nt">&lt;name&gt;</span>url<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000<span class="ni">&amp;amp;</span>sig=Yt3v...Qk<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">                </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">                </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">                  </span><span class="nt">&lt;name&gt;</span>type<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>image/jpeg<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">                </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">                </span><span class="nt">&lt;member&gt;</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">                  </span><span class="nt">&lt;name&gt;</span>length<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">                  </span><span class="nt">&lt;value&gt;&lt;int&gt;</span>1816742<span class="nt">&lt;/int&gt;&lt;/value&gt;</span>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="w">                </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">              </span><span class="nt">&lt;/struct&gt;</span>
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="w">            </span><span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">          </span><span class="nt">&lt;/member&gt;</span>
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="w">        </span><span class="nt">&lt;/struct&gt;</span>
+</span></code></pre></div>
+<h3 id="deleting-replies-from-group-conversations">Deleting Replies from Group Conversations<a class="headerlink" href="#deleting-replies-from-group-conversations" title="Permanent link">&para;</a></h3>
+<p>Clients can delete their own replies from group conversations by making an XML-RPC request to the URL specified in the <code>url</code> attribute of the <code>&lt;groupchat:group&gt;</code> element. The delete operation requires only the post ID of the message to be deleted.</p>
+<h4 id="xml-rpc-delete-request-example">XML-RPC Delete Request Example:<a class="headerlink" href="#xml-rpc-delete-request-example" title="Permanent link">&para;</a></h4>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">&lt;methodCall&gt;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">&lt;methodName&gt;</span>metaWeblog.deletePost<span class="nt">&lt;/methodName&gt;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">&lt;params&gt;</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>postid<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>username<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;string&gt;</span>password<span class="nt">&lt;/string&gt;&lt;/value&gt;</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="nt">&lt;param&gt;</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">      </span><span class="nt">&lt;value&gt;&lt;boolean&gt;</span>1<span class="nt">&lt;/boolean&gt;&lt;/value&gt;</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">    </span><span class="nt">&lt;/param&gt;</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="nt">&lt;/params&gt;</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="nt">&lt;/methodCall&gt;</span>
 </span></code></pre></div>
 <p>Where:
 - <code>postid</code> is the unique identifier of the post to be deleted
@@ -916,7 +1195,7 @@ The final boolean parameter indicates whether the post should be published (typi
 <h2 id="real-time-notifications">Real-time Notifications<a class="headerlink" href="#real-time-notifications" title="Permanent link">&para;</a></h2>
 <h3 id="using-cloud-element">Using Cloud Element<a class="headerlink" href="#using-cloud-element" title="Permanent link">&para;</a></h3>
 <p>For real-time updates, this extension recommends using the standard RSS <code>&lt;cloud&gt;</code> element to notify clients of feed updates:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">&lt;cloud</span><span class="w"> </span><span class="na">domain=</span><span class="s">&quot;rpc.example.com&quot;</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;80&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;/RPC2&quot;</span><span class="w"> </span><span class="na">registerProcedure=</span><span class="s">&quot;pleaseNotify&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;xml-rpc&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">&lt;cloud</span><span class="w"> </span><span class="na">domain=</span><span class="s">&quot;rpc.example.com&quot;</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;80&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;/RPC2&quot;</span><span class="w"> </span><span class="na">registerProcedure=</span><span class="s">&quot;pleaseNotify&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;xml-rpc&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </span></code></pre></div>
 <p>When the feed is updated with new group chat messages, the cloud mechanism sends a notification to subscribed clients, prompting them to fetch the updated feed.</p>
 <h3 id="websocket-implementation">WebSocket Implementation<a class="headerlink" href="#websocket-implementation" title="Permanent link">&para;</a></h3>
@@ -927,6 +1206,7 @@ The final boolean parameter indicates whether the post should be published (typi
 <li>Declare the GroupChat namespace in the <code>&lt;rss&gt;</code> element</li>
 <li>Include <code>&lt;groupchat:group&gt;</code> elements only within <code>&lt;item&gt;</code> elements</li>
 <li>Ensure all required attributes (<code>id</code>, <code>url</code>, and <code>title</code>) are present on each <code>&lt;groupchat:group&gt;</code> element</li>
+<li>For items carrying media, include a standard RSS <code>&lt;enclosure&gt;</code> with at least <code>url</code> and <code>type</code>; the enclosure <code>url</code> must be fetchable by subscribers (subject to the access controls below)</li>
 </ol>
 <h2 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
 <ul>
@@ -935,52 +1215,66 @@ The final boolean parameter indicates whether the post should be published (typi
 <li>Applications should implement appropriate access controls to ensure private group conversations remain private.</li>
 <li>Delete operations should be restricted to the original author of the post to prevent unauthorized deletion of messages.</li>
 <li>Implementers should validate post IDs in delete requests to ensure they exist and belong to the authenticated user.</li>
+<li>Media uploaded via <code>metaWeblog.newMediaObject</code> should be authenticated identically to <code>newPost</code> (the key in the feed URL), and the host should enforce size and MIME-type limits before storing the bytes.</li>
+<li>Because group conversations are private, media <code>&lt;enclosure&gt;</code> URLs should be access-controlled rather than world-readable — for example time-limited signed URLs scoped to a single media object — so that possessing a feed item does not grant permanent, shareable access to the underlying file.</li>
+<li>A host should associate an uploaded media object with the message that references it (e.g. by confirming the <code>enclosure</code> <code>url</code> resolves to media the host itself stored for the authenticated user) rather than trusting an arbitrary external <code>url</code>.</li>
 </ul>
 <h2 id="compatibility">Compatibility<a class="headerlink" href="#compatibility" title="Permanent link">&para;</a></h2>
 <p>This extension is designed to be fully compatible with RSS 2.0 and can be implemented alongside other RSS extensions. Feed readers that do not support this extension will simply ignore the additional elements and display the items as regular feed entries.</p>
 <h2 id="example-feed">Example Feed<a class="headerlink" href="#example-feed" title="Permanent link">&para;</a></h2>
 <p>Below is a complete example of an RSS feed implementing the GroupChat Extension:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">&lt;rss</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="w"> </span><span class="na">xmlns:groupchat=</span><span class="s">&quot;https://rss.ag/rss-groupchat-extension/ns/1.0/&quot;</span><span class="nt">&gt;</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&lt;channel&gt;</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">&lt;title&gt;</span>Example<span class="w"> </span>Feed<span class="w"> </span>with<span class="w"> </span>GroupChat<span class="w"> </span>Extension<span class="nt">&lt;/title&gt;</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">&lt;link&gt;</span>https://example.com/feed<span class="nt">&lt;/link&gt;</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>feed<span class="w"> </span>demonstrates<span class="w"> </span>the<span class="w"> </span>GroupChat<span class="w"> </span>Extension<span class="w"> </span>for<span class="w"> </span>RSS<span class="w"> </span>2.0<span class="nt">&lt;/description&gt;</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">&lt;language&gt;</span>en-us<span class="nt">&lt;/language&gt;</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>16:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">&lt;lastBuildDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>16:00:00<span class="w"> </span>GMT<span class="nt">&lt;/lastBuildDate&gt;</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">&lt;cloud</span><span class="w"> </span><span class="na">domain=</span><span class="s">&quot;rpc.example.com&quot;</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;80&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;/RPC2&quot;</span><span class="w"> </span><span class="na">registerProcedure=</span><span class="s">&quot;pleaseNotify&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;xml-rpc&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>Welcome<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>chat!<span class="nt">&lt;/title&gt;</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>message<span class="w"> </span>in<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>conversation.<span class="nt">&lt;/description&gt;</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12344<span class="nt">&lt;/link&gt;</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12344<span class="nt">&lt;/guid&gt;</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user1@example.com<span class="nt">&lt;/author&gt;</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>RE:<span class="w"> </span>Welcome<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>chat!<span class="nt">&lt;/title&gt;</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>Thanks<span class="w"> </span>for<span class="w"> </span>setting<span class="w"> </span>this<span class="w"> </span>up!<span class="nt">&lt;/description&gt;</span>
-</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:30:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
-</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/link&gt;</span>
-</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/guid&gt;</span>
-</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user2@example.com<span class="nt">&lt;/author&gt;</span>
-</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
-</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>
-</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
-</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>Public<span class="w"> </span>news<span class="w"> </span>post<span class="nt">&lt;/title&gt;</span>
-</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>regular<span class="w"> </span>news<span class="w"> </span>post,<span class="w"> </span>not<span class="w"> </span>part<span class="w"> </span>of<span class="w"> </span>any<span class="w"> </span>group<span class="w"> </span>chat.<span class="nt">&lt;/description&gt;</span>
-</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>14:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
-</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/news/98765<span class="nt">&lt;/link&gt;</span>
-</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/news/98765<span class="nt">&lt;/guid&gt;</span>
-</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>admin@example.com<span class="nt">&lt;/author&gt;</span>
-</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
-</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="w">  </span><span class="nt">&lt;/channel&gt;</span>
-</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="nt">&lt;/rss&gt;</span>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">&lt;rss</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;2.0&quot;</span><span class="w"> </span><span class="na">xmlns:groupchat=</span><span class="s">&quot;https://rss.ag/rss-groupchat-extension/ns/1.0/&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">&lt;channel&gt;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">&lt;title&gt;</span>Example<span class="w"> </span>Feed<span class="w"> </span>with<span class="w"> </span>GroupChat<span class="w"> </span>Extension<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nt">&lt;link&gt;</span>https://example.com/feed<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>feed<span class="w"> </span>demonstrates<span class="w"> </span>the<span class="w"> </span>GroupChat<span class="w"> </span>Extension<span class="w"> </span>for<span class="w"> </span>RSS<span class="w"> </span>2.0<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">&lt;language&gt;</span>en-us<span class="nt">&lt;/language&gt;</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>16:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="nt">&lt;lastBuildDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>16:00:00<span class="w"> </span>GMT<span class="nt">&lt;/lastBuildDate&gt;</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="nt">&lt;cloud</span><span class="w"> </span><span class="na">domain=</span><span class="s">&quot;rpc.example.com&quot;</span><span class="w"> </span><span class="na">port=</span><span class="s">&quot;80&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;/RPC2&quot;</span><span class="w"> </span><span class="na">registerProcedure=</span><span class="s">&quot;pleaseNotify&quot;</span><span class="w"> </span><span class="na">protocol=</span><span class="s">&quot;xml-rpc&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>Welcome<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>chat!<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>message<span class="w"> </span>in<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>conversation.<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12344<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12344<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user1@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>RE:<span class="w"> </span>Welcome<span class="w"> </span>to<span class="w"> </span>our<span class="w"> </span>group<span class="w"> </span>chat!<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>Thanks<span class="w"> </span>for<span class="w"> </span>setting<span class="w"> </span>this<span class="w"> </span>up!<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:30:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/messages/12345<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user2@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>(media)<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="w">      </span><span class="nt">&lt;description&gt;&lt;/description&gt;</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="w">      </span><span class="nt">&lt;enclosure</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;amp;sig=Yt3v...Qk&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;image/jpeg&quot;</span><span class="w"> </span><span class="na">length=</span><span class="s">&quot;1816742&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>15:45:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/messages/12346<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="w">      </span><span class="nt">&lt;guid</span><span class="w"> </span><span class="na">isPermaLink=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>12346<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>user2@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a><span class="w">      </span><span class="nt">&lt;groupchat:group</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;group123&quot;</span><span class="w"> </span><span class="na">url=</span><span class="s">&quot;https://example.com/feed?key=userkey&quot;</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Social Web Chat Group&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="w">    </span><span class="nt">&lt;item&gt;</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a><span class="w">      </span><span class="nt">&lt;title&gt;</span>Public<span class="w"> </span>news<span class="w"> </span>post<span class="nt">&lt;/title&gt;</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="w">      </span><span class="nt">&lt;description&gt;</span>This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>regular<span class="w"> </span>news<span class="w"> </span>post,<span class="w"> </span>not<span class="w"> </span>part<span class="w"> </span>of<span class="w"> </span>any<span class="w"> </span>group<span class="w"> </span>chat.<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a><span class="w">      </span><span class="nt">&lt;pubDate&gt;</span>Mon,<span class="w"> </span>10<span class="w"> </span>Mar<span class="w"> </span>2025<span class="w"> </span>14:00:00<span class="w"> </span>GMT<span class="nt">&lt;/pubDate&gt;</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a><span class="w">      </span><span class="nt">&lt;link&gt;</span>https://example.com/news/98765<span class="nt">&lt;/link&gt;</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a><span class="w">      </span><span class="nt">&lt;guid&gt;</span>https://example.com/news/98765<span class="nt">&lt;/guid&gt;</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="w">      </span><span class="nt">&lt;author&gt;</span>admin@example.com<span class="nt">&lt;/author&gt;</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a><span class="w">    </span><span class="nt">&lt;/item&gt;</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a><span class="w">  </span><span class="nt">&lt;/channel&gt;</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a><span class="nt">&lt;/rss&gt;</span>
 </span></code></pre></div>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <p>MIT</p>
@@ -1031,7 +1325,7 @@ The final boolean parameter indicates whether the post should be published (typi
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2025 Brian Hendrickson
+      Copyright &copy; 2025-2026 Brian Hendrickson
     </div>
   
   
