@@ -1,10 +1,16 @@
 # RSS GroupChat Extension
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Author:** Brian Hendrickson
-**Date:** June 23, 2026
+**Date:** July 26, 2026
 
 > **Changelog**
+> - **1.2** — Added group icons: a host can convey a group conversation's
+>   icon (an emoji, or an access-controlled photo URL) on each item via the
+>   new `<groupchat:icon>` element, so subscribing readers can render the
+>   same icon the host's own users see. Backward compatible: the namespace
+>   URI is unchanged, and readers that do not implement icons simply ignore
+>   the element.
 > - **1.1** — Added media attachments: replies may carry an image or video,
 >   uploaded with the standard MetaWebLog `metaWeblog.newMediaObject` call and
 >   referenced from `metaWeblog.newPost` via a standard RSS `<enclosure>`.
@@ -80,6 +86,50 @@ An item whose message carries an image or video includes a standard RSS 2.0 `<en
 ```
 
 A media-only message (no accompanying text) uses the placeholder `(media)` as a human-readable `<title>` so plain RSS readers show something sensible. GroupChat-aware clients should render the enclosure and ignore that placeholder title when an `<enclosure>` is present.
+
+### `<groupchat:icon>` Element (Group Icon)
+
+A group conversation may have an icon — a photo or an emoji — chosen by the group's owner on the host. The `<groupchat:icon>` element conveys that icon to subscribing readers so every participant's client can render the same visual identity for the conversation, regardless of which server they connect through.
+
+The element is an optional child of `<item>`, appearing alongside the item's `<groupchat:group>` element. It describes the icon of the *group* the item belongs to, not of the item itself.
+
+#### Attributes (exactly one of `emoji` or `url`):
+
+- **emoji**: A short emoji string that is the group's icon (e.g. `emoji="🎉"`).
+- **url**: A fetchable URL for the group's icon image on the host. Because group conversations are private, this URL should be access-controlled — for example a time-limited signed URL, exactly like a media `<enclosure>` — rather than world-readable.
+- **type** (optional, only with `url`): The MIME type of the icon image (e.g. `image/jpeg`).
+
+#### Example:
+
+```xml
+<item>
+  <title>New message in group chat</title>
+  <description>This is the content of the message in the group chat.</description>
+  <pubDate>Mon, 10 Mar 2025 15:30:00 GMT</pubDate>
+  <guid>https://example.com/messages/12345</guid>
+  <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+  <groupchat:icon emoji="🎉" />
+</item>
+```
+
+or, for a photo icon:
+
+```xml
+<groupchat:icon url="https://example.com/api/media/9d1acfd2-01bb-4c11-a2e0-5f2b1c930bfd?exp=1789200000&amp;sig=Xy7w...Rm" type="image/jpeg" />
+```
+
+#### Snapshot semantics
+
+The icon element is a snapshot of the group's *current* icon at the time the feed is rendered:
+
+- A host that supports icons MUST include the element on **every** item belonging to a group that currently has an icon, and MUST omit it on every item belonging to a group that does not. All items of one group within a single feed document therefore agree.
+- A subscriber may adopt the icon from any item of the group; the value seen on the most recent fetch is the group's current icon. If the latest fetch carries **no** `<groupchat:icon>` on a group's items, the group currently has no custom icon and the reader should fall back to its default rendering (initials, glyph, etc.).
+- When the owner changes or removes the icon, the host SHOULD notify its rssCloud subscribers (the same mechanism used for new messages) so readers re-fetch and pick up the new icon promptly, even when no new message accompanies the change.
+- Because a signed `url` expires, hosts SHOULD mint a fresh signed URL each time the feed is rendered, and subscribers SHOULD refresh their stored copy of the URL on every fetch. A reader that has not fetched the feed within the URL's validity window should degrade gracefully (e.g. fall back to its default rendering) until the next fetch.
+
+#### End-to-end encrypted groups
+
+The icon — like the group's `title` — is conversation *metadata*, not message content. In deployments where message bodies are end-to-end encrypted, the icon still travels in the clear so relaying servers can render conversation lists. Hosts for whom that is unacceptable MAY simply omit the element for encrypted groups.
 
 ## Integration with MetaWebLog API
 
@@ -309,6 +359,7 @@ A valid RSS feed implementing the GroupChat Extension must:
 2. Include `<groupchat:group>` elements only within `<item>` elements
 3. Ensure all required attributes (`id`, `url`, and `title`) are present on each `<groupchat:group>` element
 4. For items carrying media, include a standard RSS `<enclosure>` with at least `url` and `type`; the enclosure `url` must be fetchable by subscribers (subject to the access controls below)
+5. Include `<groupchat:icon>` elements only within `<item>` elements that also carry a `<groupchat:group>`, with exactly one of the `emoji` or `url` attributes present; when a group has an icon, carry the element consistently on every item of that group in the document
 
 ## Security Considerations
 
@@ -320,6 +371,8 @@ A valid RSS feed implementing the GroupChat Extension must:
 - Media uploaded via `metaWeblog.newMediaObject` should be authenticated identically to `newPost` (the key in the feed URL), and the host should enforce size and MIME-type limits before storing the bytes.
 - Because group conversations are private, media `<enclosure>` URLs should be access-controlled rather than world-readable — for example time-limited signed URLs scoped to a single media object — so that possessing a feed item does not grant permanent, shareable access to the underlying file.
 - A host should associate an uploaded media object with the message that references it (e.g. by confirming the `enclosure` `url` resolves to media the host itself stored for the authenticated user) rather than trusting an arbitrary external `url`.
+- A `<groupchat:icon>` `url` should be access-controlled the same way an `<enclosure>` `url` is (e.g. a time-limited signed URL), and should only ever reference media the host itself stores for the group; readers should treat the icon `url` as untrusted remote content (fetch it as an image only, never follow it as a navigation target).
+- Because the icon (like the group `title`) is conveyed as plaintext metadata even for end-to-end encrypted conversations, hosts and clients should not place secret content in group icons.
 
 ## Compatibility
 
@@ -349,6 +402,7 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <guid>https://example.com/messages/12344</guid>
       <author>user1@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+      <groupchat:icon emoji="🎉" />
     </item>
     
     <item>
@@ -359,6 +413,7 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <guid>https://example.com/messages/12345</guid>
       <author>user2@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+      <groupchat:icon emoji="🎉" />
     </item>
     
     <item>
@@ -370,6 +425,7 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <guid isPermaLink="false">12346</guid>
       <author>user2@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+      <groupchat:icon emoji="🎉" />
     </item>
     
     <item>
