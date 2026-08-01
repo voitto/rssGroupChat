@@ -1,10 +1,19 @@
 # RSS GroupChat Extension
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Author:** Brian Hendrickson
-**Date:** July 26, 2026
+**Date:** July 31, 2026
 
 > **Changelog**
+> - **1.3** — Added member rosters and stable author ids: a channel-level
+>   `<groupchat:roster>` element carries each group's member snapshot
+>   (names, per-member avatar URLs, per-viewer self flag), and an
+>   item-level `<groupchat:authorId>` gives every message a stable
+>   per-person key to hang member identity on. Also documents the
+>   per-viewer `<groupchat:isItemOwner>` element that implementations have
+>   carried since 1.0. Backward compatible: the namespace URI is
+>   unchanged, and readers that do not implement rosters simply ignore the
+>   elements.
 > - **1.2** — Added group icons: a host can convey a group conversation's
 >   icon (an emoji, or an access-controlled photo URL) on each item via the
 >   new `<groupchat:icon>` element, so subscribing readers can render the
@@ -130,6 +139,80 @@ The icon element is a snapshot of the group's *current* icon at the time the fee
 #### End-to-end encrypted groups
 
 The icon — like the group's `title` — is conversation *metadata*, not message content. In deployments where message bodies are end-to-end encrypted, the icon still travels in the clear so relaying servers can render conversation lists. Hosts for whom that is unacceptable MAY simply omit the element for encrypted groups.
+
+### `<groupchat:roster>` Element (Member Roster)
+
+A feed that carries group conversations SHOULD also carry, at the **channel** level, one `<groupchat:roster>` element per group the feed's reader belongs to. The roster is the group's member snapshot at feed-render time: who is in the conversation, what to call them, and (optionally) a fetchable photo for each. It is what lets a subscribing reader show member lists and profile photos for people whose accounts live on the host — without the roster, a subscriber only ever sees free-text `<author>` strings.
+
+#### Attributes:
+
+- **id** (required): The group's identifier — the same value items carry in their `<groupchat:group>` element, which is how a reader routes the roster to the right conversation.
+- **title** (optional): The group's human-readable name as rendered for this feed's reader. Feeds are per-reader, so a host that derives names from member lists SHOULD exclude the reader themselves, exactly as it does for the `<groupchat:group>` title. Carrying it here means a conversation with no messages yet still subscribes under a real name.
+
+#### `<groupchat:member>` children (one per member):
+
+- **id** (required): The host's stable identifier for this member (an integer user id on the host). This is the key that item-level `<groupchat:authorId>` values match, and it is stable across display-name changes.
+- **name** (required): The member's display name.
+- **avatar** (optional): A fetchable URL for the member's profile photo on the host. Because group conversations are private, this URL should be access-controlled — a time-limited signed URL, exactly like a media `<enclosure>` or a photo `<groupchat:icon>` — and hosts SHOULD mint a fresh signed URL on each render. A member without a photo simply omits the attribute.
+- **self** (optional): `"true"` on the single member entry that is the feed's reader themselves. Computed per viewer like `<groupchat:isItemOwner>`; readers use it to know which entry is "you" without name matching. Omitted otherwise.
+- **ai** (optional): `"true"` when the member is a host-operated automated participant (an AI assistant), so readers can badge it. Omitted otherwise.
+
+#### Example:
+
+```xml
+<channel>
+  <title>Social Web messages — Erik</title>
+  <cloud domain="example.com" port="443" path="/rsscloud/pleaseNotify" registerProcedure="" protocol="http-post" />
+  <groupchat:roster id="group123" title="Brian &amp; Evan">
+    <groupchat:member id="1" name="Brian" avatar="https://example.com/api/media/660f6467-b68b-475a-81f8-29116da0dbcb?exp=1789200000&amp;sig=r8Xk...OU" />
+    <groupchat:member id="12" name="Evan Kendig" avatar="https://example.com/api/media/9a1c2f4e-8d3b-4c5a-9e6f-7a8b9c0d1e2f?exp=1789200000&amp;sig=Gf7c...Yw" />
+    <groupchat:member id="17" name="Erik Solano" self="true" />
+  </groupchat:roster>
+  <!-- items follow -->
+</channel>
+```
+
+#### Snapshot semantics
+
+The roster follows the same snapshot contract as `<groupchat:icon>`:
+
+- The roster is the group's **complete** current membership at render time. A member absent from the latest snapshot has left the group; an `avatar` attribute absent from a member's entry means that member currently has no photo. Absence carries removal in both cases — there is no separate tombstone.
+- A host SHOULD emit a roster for **every** group the feed's reader belongs to, including groups with no items in the feed window, so brand-new conversations carry member identity from their first fetch.
+- When a member's profile photo changes (or is removed), the host SHOULD notify its rssCloud subscribers — the same mechanism used for new messages and icon changes — so readers re-fetch promptly even when no message accompanies the change. Note the fan-out: a member's photo appears in the rosters of every feed whose reader shares a group with them, so the host notifies the subscribers of each such feed.
+- Signed `avatar` URLs expire like signed icon URLs: subscribers SHOULD refresh their stored copies on every fetch and degrade gracefully (initials, glyph) when a URL expires between fetches.
+
+#### End-to-end encrypted groups
+
+Membership — like the group's title and icon — is conversation *metadata*, not message content. Rosters are carried for encrypted groups too; deployments that derive group titles from member names already expose this information. Hosts for whom that is unacceptable MAY omit rosters for encrypted groups.
+
+### `<groupchat:authorId>` Element (Stable Author Key)
+
+An optional child of `<item>`: the host's stable identifier for the message's author, matching a `<groupchat:member>` `id` in the item's group's roster. The RSS `<author>` element remains a free-text display string for plain-reader compatibility; `<groupchat:authorId>` is what GroupChat-aware readers key member identity (names, avatars) on.
+
+```xml
+<item>
+  <title>doing pretty well!</title>
+  <description>doing pretty well!</description>
+  <pubDate>Mon, 10 Mar 2025 15:30:00 GMT</pubDate>
+  <guid isPermaLink="false">36</guid>
+  <author>Evan Kendig</author>
+  <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+  <groupchat:isItemOwner>false</groupchat:isItemOwner>
+  <groupchat:authorId>12</groupchat:authorId>
+</item>
+```
+
+Encrypted-group items (whose `<author>` is a placeholder) SHOULD carry `<groupchat:authorId>` too: sender identity is routing metadata in the encrypted model, and it lets readers resolve roster avatars without waiting for decryption.
+
+### `<groupchat:isItemOwner>` Element
+
+Carried by implementations since 1.0 and documented here for completeness: an optional child of `<item>` whose value is `true` when the item was authored by the feed's reader themselves, `false` otherwise. Feeds are per-reader, so the value is computed relative to the feed's key. Readers use it to render the reader's own messages on the sending side of a chat UI without re-deriving identity — and, since 1.3, the roster's `self` attribute follows the same per-viewer rule.
+
+### Implementation notes
+
+- **Parse by local name.** The reference implementation (Social Web v3) matches extension elements by their local name (`roster`, `member`, `authorId`, `icon`, ...) rather than by resolved namespace URI, and emits the namespace declaration `xmlns:groupchat="https://socialweb.cloud/rss/groupchat"`. Interoperating parsers SHOULD match local names so feeds using either namespace URI string parse identically.
+- **`<groupchat:group>` forms.** The attribute form shown in this document (`<groupchat:group id=".." url=".." title=".." />`) and a child-element form (`<groupchat:group><id>..</id><title>..</title></groupchat:group>`, emitted by Social Web v3) both exist in the wild. Parsers SHOULD accept both.
+- **Encrypted transport elements.** Social Web v3 additionally carries `<groupchat:mls>` (opaque end-to-end-encrypted payloads with `id`/`epoch`/`contentType`/`ciphertext` children), `<groupchat:connect>` (a pending join link), and `<groupchat:deleted>` (a group-deletion tombstone item). These are implementation-defined in 1.3 and may be standardized in a future revision; readers that do not implement them ignore them safely.
 
 ## Integration with MetaWebLog API
 
@@ -393,6 +476,10 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
     <pubDate>Mon, 10 Mar 2025 16:00:00 GMT</pubDate>
     <lastBuildDate>Mon, 10 Mar 2025 16:00:00 GMT</lastBuildDate>
     <cloud domain="rpc.example.com" port="80" path="/RPC2" registerProcedure="pleaseNotify" protocol="xml-rpc" />
+    <groupchat:roster id="group123" title="Social Web Chat Group">
+      <groupchat:member id="1" name="User One" avatar="https://example.com/api/media/660f6467-b68b-475a-81f8-29116da0dbcb?exp=1789200000&amp;sig=r8Xk...OU" />
+      <groupchat:member id="2" name="User Two" self="true" />
+    </groupchat:roster>
     
     <item>
       <title>Welcome to our group chat!</title>
@@ -403,6 +490,8 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <author>user1@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
       <groupchat:icon emoji="🎉" />
+      <groupchat:isItemOwner>false</groupchat:isItemOwner>
+      <groupchat:authorId>1</groupchat:authorId>
     </item>
     
     <item>
