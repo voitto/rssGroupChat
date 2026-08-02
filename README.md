@@ -254,7 +254,9 @@ Reactions follow the same snapshot contract as `<groupchat:icon>` and `<groupcha
 
 #### End-to-end encrypted groups
 
-A reaction names a specific message and an emoji, so unlike icons, titles, and rosters it is **content, not conversation metadata**. Hosts SHOULD NOT emit plaintext `<groupchat:reaction>` elements for end-to-end encrypted groups; in those deployments a reaction should instead travel as an encrypted application message inside the group's opaque transport (e.g. a `<groupchat:mls>` payload), which is implementation-defined in this revision.
+Encrypted items MAY carry `<groupchat:reaction>` elements too: the reaction (emoji, reactor id, per-viewer `self`) travels in the clear as *acknowledgement metadata* — alongside the sender id, timing, and group routing that the encrypted model already exposes — while the message content it points at stays opaque. This is the pragmatic reading of the icon/roster metadata rule, and it is what lets a reaction survive relaying servers that cannot decrypt anything.
+
+Deployments for whom the emoji itself is sensitive MAY simply omit the element for encrypted groups (the same escape hatch icons and rosters have); a fully sealed alternative — the reaction as an encrypted application message inside the group's opaque transport (e.g. a `<groupchat:mls>` payload) — remains implementation-defined in this revision.
 
 ### `<groupchat:isItemOwner>` Element
 
@@ -500,7 +502,7 @@ The operation is a **replacement**: a caller has at most one reaction per messag
 ```
 
 Where:
-- `postid` is the unique identifier of the message being reacted to — the item's `<guid>` value in the group's feed
+- `postid` is the unique identifier of the message being reacted to — the item's `<guid>` value in the group's feed. For an end-to-end encrypted item this is the namespaced guid as emitted (e.g. `mls-3-42`); hosts resolve either form to the right message
 - `blogid`, `username` and `password` are ignored for now (key in URL provides auth) but are included for well-formed XMLRPC
 - The final string parameter is the emoji to set; an empty string clears the caller's existing reaction
 
