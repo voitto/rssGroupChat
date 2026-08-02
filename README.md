@@ -1,10 +1,21 @@
 # RSS GroupChat Extension
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Author:** Brian Hendrickson
-**Date:** July 31, 2026
+**Date:** August 1, 2026
 
 > **Changelog**
+> - **1.4** — Added emoji reactions (tapbacks): an item-level
+>   `<groupchat:reaction>` element carries the message's current set of
+>   emoji reactions (one element per reacting member, keyed by the same
+>   stable author ids rosters use), and a new `groupchat.setReaction`
+>   XML-RPC method lets a remote participant set, replace, or clear their
+>   reaction on a message they can read. Reactions follow the same
+>   snapshot contract as icons and rosters: the elements present on an
+>   item at fetch time are that item's complete current reaction set, and
+>   absence carries removal. Backward compatible: the namespace URI is
+>   unchanged, and readers that do not implement reactions simply ignore
+>   the elements.
 > - **1.3** — Added member rosters and stable author ids: a channel-level
 >   `<groupchat:roster>` element carries each group's member snapshot
 >   (names, per-member avatar URLs, per-viewer self flag), and an
@@ -204,6 +215,47 @@ An optional child of `<item>`: the host's stable identifier for the message's au
 
 Encrypted-group items (whose `<author>` is a placeholder) SHOULD carry `<groupchat:authorId>` too: sender identity is routing metadata in the encrypted model, and it lets readers resolve roster avatars without waiting for decryption.
 
+### `<groupchat:reaction>` Element (Emoji Reactions)
+
+A message may carry emoji reactions — the small "tapback" acknowledgements chat users attach to a specific message (a thumbs-up, a heart) without composing a reply. The `<groupchat:reaction>` element conveys them: an optional, repeatable child of `<item>`, one element per member who currently has a reaction on that message.
+
+#### Attributes:
+
+- **emoji** (required): The reaction itself. SHOULD be a single emoji grapheme (which may span several code points — skin tones, `‼️`, ZWJ sequences). Hosts SHOULD reject long or control-character values; readers SHOULD render the value as an opaque short string.
+- **authorId** (required): The host's stable identifier for the reacting member — the same key space as `<groupchat:authorId>` and roster `<groupchat:member>` `id` values, so readers resolve the reactor's name and avatar from the roster with no extra machinery.
+- **author** (optional): The reacting member's display name at render time, for readers that have no roster in hand.
+- **self** (optional): `"true"` when the reacting member is the feed's reader themselves. Computed per viewer exactly like `<groupchat:isItemOwner>` and the roster's `self` attribute; readers use it to highlight "your" reaction and to know what a repeated `setReaction` will replace. Omitted otherwise.
+
+#### Example:
+
+```xml
+<item>
+  <title>OK. I'll come by.</title>
+  <description>OK. I'll come by.</description>
+  <pubDate>Mon, 10 Mar 2025 15:30:00 GMT</pubDate>
+  <guid isPermaLink="false">36</guid>
+  <author>Evan Kendig</author>
+  <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+  <groupchat:isItemOwner>false</groupchat:isItemOwner>
+  <groupchat:authorId>12</groupchat:authorId>
+  <groupchat:reaction emoji="👍" authorId="1" author="Brian" self="true" />
+  <groupchat:reaction emoji="❤️" authorId="17" author="Erik Solano" />
+</item>
+```
+
+#### Snapshot semantics
+
+Reactions follow the same snapshot contract as `<groupchat:icon>` and `<groupchat:roster>`, applied per item:
+
+- The `<groupchat:reaction>` elements present on an item are that message's **complete** current reaction set at render time. A member appears **at most once** per item; setting a new reaction replaces the old one, and a member absent from the latest snapshot has removed their reaction. Absence carries removal — there is no separate tombstone. A reader that encounters duplicate `authorId` values on one item SHOULD keep only the last.
+- Because items are conventionally treated as immutable by RSS readers, GroupChat-aware readers SHOULD re-reconcile the reaction set of **already-seen items** on every fetch (the same way they re-check `<groupchat:icon>`), rather than skipping known guids wholesale.
+- When a reaction is set, replaced, or removed, the host SHOULD notify its rssCloud subscribers — the same mechanism used for new messages, icon changes, and roster changes — so readers re-fetch promptly even though no new item accompanies the change. Note the fan-out: the item appears in the feed of every member of the group, so the host notifies the subscribers of each member's feed.
+- Reactions travel only while their item is present in the feed document. A reaction to a message that has already scrolled out of the host's feed window does not propagate; hosts SHOULD size their window so that the recent messages users actually react to are still present.
+
+#### End-to-end encrypted groups
+
+A reaction names a specific message and an emoji, so unlike icons, titles, and rosters it is **content, not conversation metadata**. Hosts SHOULD NOT emit plaintext `<groupchat:reaction>` elements for end-to-end encrypted groups; in those deployments a reaction should instead travel as an encrypted application message inside the group's opaque transport (e.g. a `<groupchat:mls>` payload), which is implementation-defined in this revision.
+
 ### `<groupchat:isItemOwner>` Element
 
 Carried by implementations since 1.0 and documented here for completeness: an optional child of `<item>` whose value is `true` when the item was authored by the feed's reader themselves, `false` otherwise. Feeds are per-reader, so the value is computed relative to the feed's key. Readers use it to render the reader's own messages on the sending side of a chat UI without re-deriving identity — and, since 1.3, the roster's `self` attribute follows the same per-viewer rule.
@@ -216,7 +268,7 @@ Carried by implementations since 1.0 and documented here for completeness: an op
 
 ## Integration with MetaWebLog API
 
-The RSS GroupChat Extension supports both creating and deleting replies in group conversations through XML-RPC requests to the feed URL.
+The RSS GroupChat Extension supports creating and deleting replies in group conversations — and, since 1.4, setting and clearing emoji reactions on them — through XML-RPC requests to the feed URL.
 
 ### Sending Replies to Group Conversations
 
@@ -418,6 +470,57 @@ Where:
 - `blogid`, `username` and `password` are ignored for now (key in URL provides auth) but are included for well-formed XMLRPC
 - The final boolean parameter indicates whether the post should be published (typically `true` for delete operations)
 
+### Reacting to Messages in Group Conversations
+
+Since 1.4, a participant can set, replace, or clear their emoji reaction on a message by making an XML-RPC request to the URL specified in the `url` attribute of the `<groupchat:group>` element, using the `groupchat.setReaction` method. The call is deliberately shaped like `metaWeblog.deletePost` — a post id plus the well-formed-XMLRPC stub credentials — with the emoji as the final parameter.
+
+The operation is a **replacement**: a caller has at most one reaction per message, a new emoji replaces any previous one, and an **empty string clears** the caller's reaction. Repeating a call is idempotent.
+
+#### `groupchat.setReaction` Request Example:
+
+```xml
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>groupchat.setReaction</methodName>
+  <params>
+    <param>
+      <value><string>postid</string></value>
+    </param>
+    <param>
+      <value><string>username</string></value>
+    </param>
+    <param>
+      <value><string>password</string></value>
+    </param>
+    <param>
+      <value><string>👍</string></value>
+    </param>
+  </params>
+</methodCall>
+```
+
+Where:
+- `postid` is the unique identifier of the message being reacted to — the item's `<guid>` value in the group's feed
+- `blogid`, `username` and `password` are ignored for now (key in URL provides auth) but are included for well-formed XMLRPC
+- The final string parameter is the emoji to set; an empty string clears the caller's existing reaction
+
+#### Response:
+
+The response is a single boolean, like a delete:
+
+```xml
+<?xml version="1.0"?>
+<methodResponse>
+  <params>
+    <param>
+      <value><boolean>1</boolean></value>
+    </param>
+  </params>
+</methodResponse>
+```
+
+After accepting a reaction change the host re-renders its feeds with the updated `<groupchat:reaction>` snapshot on the affected item and notifies its rssCloud subscribers, exactly as it does for a new message. The reacting participant sees their own reaction return on the round-trip (`self="true"` in their feed), which confirms the write without a separate read API.
+
 ## Real-time Notifications
 
 ### Using Cloud Element
@@ -443,6 +546,7 @@ A valid RSS feed implementing the GroupChat Extension must:
 3. Ensure all required attributes (`id`, `url`, and `title`) are present on each `<groupchat:group>` element
 4. For items carrying media, include a standard RSS `<enclosure>` with at least `url` and `type`; the enclosure `url` must be fetchable by subscribers (subject to the access controls below)
 5. Include `<groupchat:icon>` elements only within `<item>` elements that also carry a `<groupchat:group>`, with exactly one of the `emoji` or `url` attributes present; when a group has an icon, carry the element consistently on every item of that group in the document
+6. Include `<groupchat:reaction>` elements only within `<item>` elements that also carry a `<groupchat:group>`, each with `emoji` and `authorId` present and at most one element per `authorId` per item
 
 ## Security Considerations
 
@@ -456,6 +560,8 @@ A valid RSS feed implementing the GroupChat Extension must:
 - A host should associate an uploaded media object with the message that references it (e.g. by confirming the `enclosure` `url` resolves to media the host itself stored for the authenticated user) rather than trusting an arbitrary external `url`.
 - A `<groupchat:icon>` `url` should be access-controlled the same way an `<enclosure>` `url` is (e.g. a time-limited signed URL), and should only ever reference media the host itself stores for the group; readers should treat the icon `url` as untrusted remote content (fetch it as an image only, never follow it as a navigation target).
 - Because the icon (like the group `title`) is conveyed as plaintext metadata even for end-to-end encrypted conversations, hosts and clients should not place secret content in group icons.
+- `groupchat.setReaction` should be restricted to members of the group that owns the referenced message, authenticated identically to `newPost` (the key in the feed URL), and hosts should validate that the post id exists and is visible to the caller before writing.
+- Hosts should validate the reaction value (length-limit it, reject control characters) before storing or re-emitting it, and readers should render reaction strings as opaque inert text — never as markup.
 
 ## Compatibility
 
@@ -503,6 +609,9 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <author>user2@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
       <groupchat:icon emoji="🎉" />
+      <groupchat:isItemOwner>true</groupchat:isItemOwner>
+      <groupchat:authorId>2</groupchat:authorId>
+      <groupchat:reaction emoji="👍" authorId="1" author="User One" />
     </item>
     
     <item>
