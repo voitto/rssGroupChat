@@ -1,10 +1,19 @@
 # RSS GroupChat Extension
 
-**Version:** 1.4  
+**Version:** 1.5  
 **Author:** Brian Hendrickson
-**Date:** August 1, 2026
+**Date:** August 5, 2026
 
 > **Changelog**
+> - **1.5** — Added attachment filenames: an item-level
+>   `<groupchat:filename>` element carries the enclosure's original
+>   filename (which RSS's `<enclosure>` cannot express), so a document
+>   attachment — a PDF, say — keeps its real name when it crosses
+>   instances, and receiving readers can render a "name + size" file
+>   card instead of a type-derived placeholder. The size already rides
+>   the enclosure's standard `length` attribute. Backward compatible:
+>   the namespace URI is unchanged, and readers that do not implement
+>   filenames simply ignore the element.
 > - **1.4** — Added emoji reactions (tapbacks): an item-level
 >   `<groupchat:reaction>` element carries the message's current set of
 >   emoji reactions (one element per reacting member, keyed by the same
@@ -40,7 +49,7 @@
 
 ## Overview
 
-The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API. Replies may include media (images and video), transferred with the standard MetaWebLog media-upload call and surfaced in the feed as a standard RSS `<enclosure>`.
+The RSS GroupChat Extension is a specification that extends RSS 2.0 to support group chat functionality within feed readers. This extension enables feed readers to segregate private conversation posts from public news posts and allows participants to reply to specific conversations using the MetaWebLog API. Replies may include media (images, video, and documents such as PDFs), transferred with the standard MetaWebLog media-upload call and surfaced in the feed as a standard RSS `<enclosure>` — accompanied, since 1.5, by the attachment's original filename in `<groupchat:filename>`.
 
 ## Namespace Declaration
 
@@ -83,13 +92,13 @@ The `<groupchat:group>` element must be a child of the `<item>` element in an RS
 
 ### `<enclosure>` Element (Media)
 
-An item whose message carries an image or video includes a standard RSS 2.0 `<enclosure>` element alongside its `<groupchat:group>`. No new namespace is involved — media reuses the RSS 2.0 enclosure mechanism that podcast feeds already use.
+An item whose message carries an image, video, or document (e.g. a PDF) includes a standard RSS 2.0 `<enclosure>` element alongside its `<groupchat:group>`. No new namespace is involved — media reuses the RSS 2.0 enclosure mechanism that podcast feeds already use.
 
 #### Attributes:
 
 - **url** (required): A fetchable URL for the media on the host. Because group conversations are private, this URL should be access-controlled — for example a time-limited signed URL that does not require the fetching client to hold a session on the host.
-- **type** (required): The MIME type of the media (e.g. `image/jpeg`, `video/mp4`).
-- **length** (recommended): The size of the media in bytes, per RSS 2.0.
+- **type** (required): The MIME type of the media (e.g. `image/jpeg`, `video/mp4`, `application/pdf`).
+- **length** (recommended): The size of the media in bytes, per RSS 2.0. Since 1.5 this attribute does double duty: a reader building a "name + size" file card for a document attachment takes the size from here (and the name from `<groupchat:filename>`).
 
 #### Example:
 
@@ -106,6 +115,32 @@ An item whose message carries an image or video includes a standard RSS 2.0 `<en
 ```
 
 A media-only message (no accompanying text) uses the placeholder `(media)` as a human-readable `<title>` so plain RSS readers show something sensible. GroupChat-aware clients should render the enclosure and ignore that placeholder title when an `<enclosure>` is present.
+
+### `<groupchat:filename>` Element (Attachment Filename)
+
+Since 1.5. RSS's `<enclosure>` carries `url`, `type`, and `length` — but no filename, so an attachment that is neither an image nor a video (a PDF, say) crosses instances nameless, and a receiving reader can label its file card only with a type-derived placeholder like "PDF file". The `<groupchat:filename>` element closes that gap: an optional child of `<item>`, carried alongside the item's `<enclosure>`, whose text content is the attachment's original filename, XML-escaped.
+
+#### Example:
+
+```xml
+<item>
+  <title>(media)</title>
+  <description></description>
+  <enclosure url="https://example.com/api/media/7b1decc7-a3ce-4168-ccff-d541fa41c0d6?exp=1789200000&amp;sig=Zu4w...Rl" type="application/pdf" length="182329" />
+  <groupchat:filename>Q3 R&amp;D report.pdf</groupchat:filename>
+  <pubDate>Mon, 10 Mar 2025 15:30:00 GMT</pubDate>
+  <guid isPermaLink="false">16</guid>
+  <author>user2@example.com</author>
+  <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+</item>
+```
+
+#### Semantics
+
+- The element appears only on items that also carry an `<enclosure>`, at most once per item. Hosts SHOULD emit it for every enclosure whose original filename they know — images and video included, not just documents; readers decide how to use it (a document file card renders it as the card's title; an image or video bubble may ignore it or use it as a save-as name).
+- The attachment's byte size is deliberately NOT duplicated in this element: it rides the enclosure's standard `length` attribute, which RSS 2.0 already defines. A reader building a "name + size" file card takes the name from this element and the size from `length`.
+- The canonical source of the name is the `name` field of the `metaWeblog.newMediaObject` call that uploaded the attachment (see [Attaching Media to Replies](#attaching-media-to-replies)). Hosts SHOULD store that name with the media and echo it here, so a document a remote participant sends into the group fans out to every member under its original name.
+- Absence means the name is unknown — an item from a pre-1.5 host, or media whose name was never captured. Readers SHOULD fall back to a type-derived label (e.g. "PDF file") rather than inventing a name. Backward compatible: readers that do not implement the element simply ignore it.
 
 ### `<groupchat:icon>` Element (Group Icon)
 
@@ -327,11 +362,11 @@ The final boolean parameter indicates whether the post should be published (typi
 
 ### Attaching Media to Replies
 
-A reply may carry an image or video. Media transfer uses the standard MetaWebLog `metaWeblog.newMediaObject` call, performed *alongside* the `metaWeblog.newPost` that creates the message — the same two-call pattern blogging clients use to attach an image to a post. Both calls go to the conversation's feed `url` and are authenticated the same way (the key in the URL).
+A reply may carry an image, video, or document (e.g. a PDF). Media transfer uses the standard MetaWebLog `metaWeblog.newMediaObject` call, performed *alongside* the `metaWeblog.newPost` that creates the message — the same two-call pattern blogging clients use to attach an image to a post. Both calls go to the conversation's feed `url` and are authenticated the same way (the key in the URL).
 
 The sequence is:
 
-1. **Upload the binary** with `metaWeblog.newMediaObject`. The struct parameter carries the file `name`, MIME `type`, and the raw file `bits` (base64-encoded). The host stores the media and returns a struct containing a `url` at which the media can be fetched.
+1. **Upload the binary** with `metaWeblog.newMediaObject`. The struct parameter carries the file `name`, MIME `type`, and the raw file `bits` (base64-encoded). The host stores the media and returns a struct containing a `url` at which the media can be fetched. Since 1.5 the `name` is more than a hint: the host SHOULD retain it as the attachment's original filename and echo it in the feed as `<groupchat:filename>`, so the file keeps its name on every subscriber's instance.
 2. **Create the message** with `metaWeblog.newPost`, adding a standard RSS `enclosure` member to the struct whose `url` is the value returned in step 1. The host attaches that media to the new message. A media-only message is valid — send an empty `title`/`description` with the `enclosure` member present.
 
 The host then republishes the message in its feed with a matching `<enclosure>` element (see [`<enclosure>` Element (Media)](#enclosure-element-media)), so every subscriber — including the original sender, who sees the message return on the round-trip — can render the attachment.
@@ -549,6 +584,7 @@ A valid RSS feed implementing the GroupChat Extension must:
 4. For items carrying media, include a standard RSS `<enclosure>` with at least `url` and `type`; the enclosure `url` must be fetchable by subscribers (subject to the access controls below)
 5. Include `<groupchat:icon>` elements only within `<item>` elements that also carry a `<groupchat:group>`, with exactly one of the `emoji` or `url` attributes present; when a group has an icon, carry the element consistently on every item of that group in the document
 6. Include `<groupchat:reaction>` elements only within `<item>` elements that also carry a `<groupchat:group>`, each with `emoji` and `authorId` present and at most one element per `authorId` per item
+7. Include `<groupchat:filename>` elements only within `<item>` elements that also carry an `<enclosure>`, at most one per item, with the attachment's original filename as XML-escaped text content
 
 ## Security Considerations
 
@@ -564,6 +600,7 @@ A valid RSS feed implementing the GroupChat Extension must:
 - Because the icon (like the group `title`) is conveyed as plaintext metadata even for end-to-end encrypted conversations, hosts and clients should not place secret content in group icons.
 - `groupchat.setReaction` should be restricted to members of the group that owns the referenced message, authenticated identically to `newPost` (the key in the feed URL), and hosts should validate that the post id exists and is visible to the caller before writing.
 - Hosts should validate the reaction value (length-limit it, reject control characters) before storing or re-emitting it, and readers should render reaction strings as opaque inert text — never as markup.
+- A `<groupchat:filename>` value is untrusted remote text: hosts should length-limit it and strip control characters before storing or re-emitting, and readers should render it as opaque inert text — never as markup, and never as a filesystem path (strip directory separators before using it as a download name).
 
 ## Compatibility
 
@@ -620,12 +657,28 @@ Below is a complete example of an RSS feed implementing the GroupChat Extension:
       <title>(media)</title>
       <description></description>
       <enclosure url="https://example.com/api/media/8c0dbeb6-f2ad-4057-bbff-c430f930bfc5?exp=1789200000&amp;sig=Yt3v...Qk" type="image/jpeg" length="1816742" />
+      <groupchat:filename>photo.jpg</groupchat:filename>
       <pubDate>Mon, 10 Mar 2025 15:45:00 GMT</pubDate>
       <link>https://example.com/messages/12346</link>
       <guid isPermaLink="false">12346</guid>
       <author>user2@example.com</author>
       <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
       <groupchat:icon emoji="🎉" />
+    </item>
+    
+    <item>
+      <title>(media)</title>
+      <description></description>
+      <enclosure url="https://example.com/api/media/7b1decc7-a3ce-4168-ccff-d541fa41c0d6?exp=1789200000&amp;sig=Zu4w...Rl" type="application/pdf" length="182329" />
+      <groupchat:filename>Q3 R&amp;D report.pdf</groupchat:filename>
+      <pubDate>Mon, 10 Mar 2025 15:50:00 GMT</pubDate>
+      <link>https://example.com/messages/12347</link>
+      <guid isPermaLink="false">12347</guid>
+      <author>user1@example.com</author>
+      <groupchat:group id="group123" url="https://example.com/feed?key=userkey" title="Social Web Chat Group" />
+      <groupchat:icon emoji="🎉" />
+      <groupchat:isItemOwner>false</groupchat:isItemOwner>
+      <groupchat:authorId>1</groupchat:authorId>
     </item>
     
     <item>
